@@ -1,0 +1,53 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model User {
+  id       Int        @id @default(autoincrement())
+  name     String
+  email    String     @unique
+  password String
+  role     String
+  progress Progress[]
+}
+
+model Category {
+  id       Int       @id @default(autoincrement())
+  name     String
+  contents Content[]
+}
+
+model Content {
+  id          Int          @id @default(autoincrement())
+  title       String
+  description String
+  categoryId  Int?
+  category    Category?    @relation(fields: [categoryId], references: [id])
+  progress    Progress[]
+  attachments Attachment[]
+}
+
+model Progress {
+  id        Int     @id @default(autoincrement())
+  userId    Int
+  contentId Int
+  completed Boolean @default(false)
+
+  user    User    @relation(fields: [userId], references: [id])
+  content Content @relation(fields: [contentId], references: [id])
+
+  @@unique([userId, contentId])
+}
+
+model Attachment {
+  id        Int     @id @default(autoincrement())
+  contentId Int
+  fileName  String
+  fileUrl   String
+
+  content Content @relation(fields: [contentId], references: [id])
+}
