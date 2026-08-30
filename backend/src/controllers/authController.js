@@ -4,16 +4,32 @@ const prisma = require("../lib/prisma");
 
 async function register(req, res) {
   try {
-    const { name, email, password } = req.body;
+    const { name, email, password, role } = req.body;
 
-    if (!name || !email || !password) {
+    if (!name || !email || !password || !role) {
       return res.status(400).json({
-        message: "Name, email and password are required",
+        message: "Name, email, password and role are required",
+      });
+    }
+
+    const normalizedEmail = email.trim().toLowerCase();
+
+    if (password.length < 6) {
+      return res.status(400).json({
+        message: "Password must be at least 6 characters",
+      });
+    }
+
+    const allowedRoles = ["admin", "employee"];
+
+    if (!allowedRoles.includes(role)) {
+      return res.status(400).json({
+        message: "Invalid role",
       });
     }
 
     const existingUser = await prisma.user.findUnique({
-      where: { email },
+      where: { email: normalizedEmail },
     });
 
     if (existingUser) {
@@ -27,9 +43,9 @@ async function register(req, res) {
     const user = await prisma.user.create({
       data: {
         name,
-        email,
+        email: normalizedEmail,
         password: hashedPassword,
-        role: "employee",
+        role,
       },
     });
 
@@ -41,6 +57,7 @@ async function register(req, res) {
     });
   } catch (error) {
     console.error(error);
+
     return res.status(500).json({
       message: "Internal server error",
     });
@@ -57,8 +74,10 @@ async function login(req, res) {
       });
     }
 
+    const normalizedEmail = email.trim().toLowerCase();
+
     const user = await prisma.user.findUnique({
-      where: { email },
+      where: { email: normalizedEmail },
     });
 
     if (!user) {
@@ -97,6 +116,7 @@ async function login(req, res) {
     });
   } catch (error) {
     console.error(error);
+
     return res.status(500).json({
       message: "Internal server error",
     });
