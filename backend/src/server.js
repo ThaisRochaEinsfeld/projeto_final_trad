@@ -6,6 +6,13 @@ const PORT = 3000;
 
 const authenticateToken = require("./middleware/authenticateToken");
 const requireRole = require("./middleware/requireRole");
+const cors = require("cors");
+
+app.use(
+  cors({
+    origin: "http://localhost:5173",
+  })
+);
 
 app.use(express.json());
 
