@@ -1,5 +1,6 @@
 require("dotenv").config();
 
+const bcrypt = require("bcrypt");
 const { PrismaPg } = require("@prisma/adapter-pg");
 const { PrismaClient } = require("@prisma/client");
 
@@ -10,18 +11,21 @@ const adapter = new PrismaPg({
 const prisma = new PrismaClient({ adapter });
 
 async function main() {
+  const adminPassword = await bcrypt.hash("admin123", 10);
+  const employeePassword = await bcrypt.hash("employee123", 10);
+
   await prisma.user.createMany({
     data: [
       {
         name: "Admin User",
         email: "admin@example.com",
-        password: "admin123",
+        password: adminPassword,
         role: "admin",
       },
       {
         name: "Employee User",
         email: "employee@example.com",
-        password: "employee123",
+        password: employeePassword,
         role: "employee",
       },
     ],
