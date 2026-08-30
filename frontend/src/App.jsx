@@ -1,9 +1,36 @@
+import { Navigate, Route, Routes } from "react-router-dom";
+
+import Login from "./pages/Login";
+import Admin from "./pages/Admin";
+import Dashboard from "./pages/Dashboard";
+import ProtectedRoute from "./components/ProtectedRoute";
+
 function App() {
   return (
-    <main>
-      <h1>Onboarding Platform</h1>
-    </main>
-  )
+    <Routes>
+      <Route path="/" element={<Navigate to="/login" replace />} />
+
+      <Route path="/login" element={<Login />} />
+
+      <Route
+        path="/admin"
+        element={
+          <ProtectedRoute allowedRoles={["admin"]}>
+            <Admin />
+          </ProtectedRoute>
+        }
+      />
+
+      <Route
+        path="/dashboard"
+        element={
+          <ProtectedRoute allowedRoles={["employee"]}>
+            <Dashboard />
+          </ProtectedRoute>
+        }
+      />
+    </Routes>
+  );
 }
 
-export default App
+export default App;
