@@ -4,6 +4,7 @@ import Login from "./pages/Login";
 import Admin from "./pages/Admin";
 import Dashboard from "./pages/Dashboard";
 import ProtectedRoute from "./components/ProtectedRoute";
+import Users from "./pages/Users";
 
 function App() {
   return (
@@ -26,6 +27,15 @@ function App() {
         element={
           <ProtectedRoute allowedRoles={["employee"]}>
             <Dashboard />
+          </ProtectedRoute>
+        }
+      />
+
+      <Route
+        path="/admin/users"
+        element={
+          <ProtectedRoute allowedRoles={["admin"]}>
+            <Users />
           </ProtectedRoute>
         }
       />
