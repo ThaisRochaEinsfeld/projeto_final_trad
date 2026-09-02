@@ -8,7 +8,7 @@ const authenticateToken = require("./middleware/authenticateToken");
 const requireRole = require("./middleware/requireRole");
 const cors = require("cors");
 const contentRoutes = require("./routes/contentRoutes");
-
+const categoryRoutes = require("./routes/categoryRoutes");
 
 app.use(
   cors({
@@ -23,6 +23,8 @@ app.get("/", (req, res) => {
 });
 
 app.use("/auth", authRoutes);
+
+app.use("/categories", categoryRoutes);
 
 app.get("/profile", authenticateToken, (req, res) => {
   res.json({
