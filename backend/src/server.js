@@ -7,6 +7,8 @@ const PORT = 3000;
 const authenticateToken = require("./middleware/authenticateToken");
 const requireRole = require("./middleware/requireRole");
 const cors = require("cors");
+const contentRoutes = require("./routes/contentRoutes");
+
 
 app.use(
   cors({
@@ -28,6 +30,8 @@ app.get("/profile", authenticateToken, (req, res) => {
     user: req.user,
   });
 });
+
+app.use("/contents", contentRoutes);
 
 app.get(
   "/admin",
