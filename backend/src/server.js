@@ -9,6 +9,7 @@ const requireRole = require("./middleware/requireRole");
 const cors = require("cors");
 const contentRoutes = require("./routes/contentRoutes");
 const categoryRoutes = require("./routes/categoryRoutes");
+const progressRoutes = require("./routes/progressRoutes");
 
 app.use(
   cors({
@@ -34,6 +35,7 @@ app.get("/profile", authenticateToken, (req, res) => {
 });
 
 app.use("/contents", contentRoutes);
+app.use("/progress", progressRoutes);
 
 app.get(
   "/admin",
