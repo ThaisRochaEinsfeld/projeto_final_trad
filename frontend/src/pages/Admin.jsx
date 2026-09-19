@@ -1,9 +1,12 @@
+import AdminLayout from "../components/AdminLayout";
+import Contents from "./Contents";
+
 function Admin() {
-    return (
-      <main>
-        <h1>Painel do Administrador</h1>
-      </main>
-    );
-  }
-  
-  export default Admin;
+  return (
+    <AdminLayout>
+      <Contents />
+    </AdminLayout>
+  );
+}
+
+export default Admin;

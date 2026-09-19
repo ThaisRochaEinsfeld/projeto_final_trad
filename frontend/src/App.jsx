@@ -5,6 +5,7 @@ import Admin from "./pages/Admin";
 import Dashboard from "./pages/Dashboard";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Users from "./pages/Users";
+import AdminOnboarding from "./pages/AdminOnboarding";
 
 function App() {
   return (
@@ -36,6 +37,14 @@ function App() {
         element={
           <ProtectedRoute allowedRoles={["admin"]}>
             <Users />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/admin/onboarding"
+        element={
+          <ProtectedRoute allowedRoles={["admin"]}>
+            <AdminOnboarding />
           </ProtectedRoute>
         }
       />
