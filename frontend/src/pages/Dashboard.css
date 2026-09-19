@@ -1,0 +1,29 @@
+.user-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 28px 60px;
+    background: linear-gradient(90deg, #1764f5, #2f80ff);
+    color: white;
+  }
+  
+  .user-header h1 {
+    margin: 0;
+  }
+  
+  .user-header p {
+    margin: 4px 0 0;
+  }
+  
+  .user-header button {
+    padding: 10px 20px;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.08);
+    color: white;
+    cursor: pointer;
+  }
+  
+  .user-main {
+    padding: 48px 60px;
+  }
