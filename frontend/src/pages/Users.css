@@ -1,92 +1,85 @@
-main {
+.users-page {
   max-width: 700px;
   margin: 0 auto;
   padding: 32px 24px;
 }
 
-main h1 {
+.users-page h1 {
   margin: 0 0 24px;
   font-size: 28px;
   color: #1f2937;
 }
 
-form {
+.users-page form {
   background: #ffffff;
   border: 1px solid #e5e7eb;
   border-radius: 12px;
   padding: 24px;
 }
 
-form > div {
+.users-page form > div {
   display: flex;
   flex-direction: column;
   gap: 6px;
   margin-bottom: 18px;
 }
 
-form label {
+.users-page form label {
   font-size: 14px;
   font-weight: 600;
   color: #374151;
 }
 
-form input,
-form select {
+.users-page form input,
+.users-page form select {
   width: 100%;
   box-sizing: border-box;
   padding: 10px 12px;
-
   font-size: 14px;
-
   border: 1px solid #d1d5db;
   border-radius: 8px;
-
   background: #ffffff;
 }
 
-form input:focus,
-form select:focus {
+.users-page form input:focus,
+.users-page form select:focus {
   outline: none;
   border-color: #2563eb;
 }
 
-form button {
+.users-page form button {
   padding: 10px 18px;
-
   border: none;
   border-radius: 8px;
-
   background: #2563eb;
   color: #ffffff;
-
   font-size: 14px;
   font-weight: 600;
-
   cursor: pointer;
 }
 
-form button:hover {
+.users-page form button:hover {
   background: #1d4ed8;
 }
 
-form button:disabled {
+.users-page form button:disabled {
   opacity: 0.6;
   cursor: not-allowed;
 }
 
-form p {
+.users-page form p {
   margin: 12px 0;
   font-size: 14px;
 }
 
-.form-error {
+.users-page .form-error {
   padding: 10px 12px;
   border-radius: 8px;
   background: #fef2f2;
   color: #b91c1c;
 }
 
-.form-success {
+.users-page .form-success {
   padding: 10px 12px;
   border-radius: 8px;
   background: #f0fdf4;

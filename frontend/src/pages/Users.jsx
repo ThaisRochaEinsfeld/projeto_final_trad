@@ -57,7 +57,7 @@ function Users() {
   }
 
   return (
-    <main>
+    <main className="users-page">
       <h1>Usuários</h1>
 
       <form onSubmit={handleSubmit}>
