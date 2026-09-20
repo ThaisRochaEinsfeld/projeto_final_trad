@@ -39,7 +39,7 @@ function AdminLayout({ children }) {
               isActive ? "active" : ""
             }
           >
-            ♙ Usuários
+            Usuários
           </NavLink>
 
           <NavLink

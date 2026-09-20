@@ -1,123 +1,142 @@
 .contents-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 32px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+}
+
+.content-card {
+  background: white;
+  border: 1px solid #bfdbfe;
+  border-radius: 16px;
+  padding: 28px;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.08);
+}
+
+.content-card h2 {
+  margin: 0 0 8px;
+  color: #155eef;
+}
+
+.content-card > p {
+  margin-top: 0;
+  color: #667085;
+}
+
+.content-card form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.content-card label {
+  margin-top: 10px;
+  font-weight: 600;
+}
+
+.content-card input,
+.content-card textarea,
+.content-card select {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 13px 14px;
+  border: 1px solid #bfdbfe;
+  border-radius: 10px;
+  font-size: 15px;
+}
+
+.content-card textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+.primary-button {
+  margin-top: 14px;
+  padding: 14px;
+  border: none;
+  border-radius: 10px;
+  background: #246bfd;
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.secondary-button {
+  padding: 12px;
+  border: 1px solid #246bfd;
+  border-radius: 10px;
+  background: white;
+  color: #246bfd;
+  cursor: pointer;
+}
+
+.content-list {
+  margin-top: 28px;
+}
+
+.content-item {
+  border: 1px solid #bfdbfe;
+  border-radius: 14px;
+  padding: 20px;
+  margin-bottom: 16px;
+}
+
+.content-item-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+} 
+
+.content-item h3 {
+  margin: 0;
+}
+
+.content-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.button-edit {
+  padding: 8px 12px;
+  border: none;
+  border-radius: 8px;
+  background: #246bfd;
+  color: white;
+  cursor: pointer;
+}
+
+.button-delete {
+  padding: 8px 12px;
+  border: none;
+  border-radius: 8px;
+  background: #d92d20;
+  color: white;
+  cursor: pointer;
+}
+
+.category-badge {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 5px 10px;
+  border-radius: 20px;
+  background: #246bfd;
+  color: white;
+  font-size: 13px;
+}
+
+.form-error {
+  color: #d92d20;
+}
+
+.form-success {
+  color: #039855;
+}
+
+@media (max-width: 900px) {
+  .contents-grid {
+    grid-template-columns: 1fr;
   }
-  
-  .content-card {
-    background: white;
-    border: 1px solid #bfdbfe;
-    border-radius: 16px;
-    padding: 28px;
-    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.08);
-  }
-  
-  .content-card h2 {
-    margin: 0 0 8px;
-    color: #155eef;
-  }
-  
-  .content-card > p {
-    margin-top: 0;
-    color: #667085;
-  }
-  
-  .content-card form {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-  
-  .content-card label {
-    margin-top: 10px;
-    font-weight: 600;
-  }
-  
-  .content-card input,
-  .content-card textarea,
-  .content-card select {
-    box-sizing: border-box;
-    width: 100%;
-    padding: 13px 14px;
-    border: 1px solid #bfdbfe;
-    border-radius: 10px;
-    font-size: 15px;
-  }
-  
-  .content-card textarea {
-    min-height: 100px;
-    resize: vertical;
-  }
-  
-  .primary-button {
-    margin-top: 14px;
-    padding: 14px;
-    border: none;
-    border-radius: 10px;
-    background: #246bfd;
-    color: white;
-    font-size: 16px;
-    font-weight: 600;
-    cursor: pointer;
-  }
-  
-  .secondary-button {
-    padding: 12px;
-    border: 1px solid #246bfd;
-    border-radius: 10px;
-    background: white;
-    color: #246bfd;
-    cursor: pointer;
-  }
-  
-  .content-list {
-    margin-top: 28px;
-  }
-  
-  .content-item {
-    border: 1px solid #bfdbfe;
-    border-radius: 14px;
-    padding: 20px;
-    margin-bottom: 16px;
-  }
-  
-  .content-item-header {
-    display: flex;
-    justify-content: space-between;
-    gap: 16px;
-  }
-  
-  .content-item h3 {
-    margin: 0;
-  }
-  
-  .icon-button {
-    border: none;
-    background: none;
-    cursor: pointer;
-    font-size: 16px;
-  }
-  
-  .category-badge {
-    display: inline-block;
-    margin-top: 10px;
-    padding: 5px 10px;
-    border-radius: 20px;
-    background: #246bfd;
-    color: white;
-    font-size: 13px;
-  }
-  
-  .form-error {
-    color: #d92d20;
-  }
-  
-  .form-success {
-    color: #039855;
-  }
-  
-  @media (max-width: 900px) {
-    .contents-grid {
-      grid-template-columns: 1fr;
-    }
-  }
+}

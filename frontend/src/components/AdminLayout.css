@@ -1,52 +1,125 @@
 .admin-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 28px 60px;
-    background: linear-gradient(90deg, #1764f5, #2f80ff);
-    color: white;
+  background: linear-gradient(90deg, #2563eb, #3b82f6);
+  border-bottom: 1px solid #1d4ed8;
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.18);
+  color: white;
+}
+
+.admin-header > div,
+.admin-header {
+  box-sizing: border-box;
+}
+
+.admin-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24px max(24px, calc((100% - 1280px) / 2));
+}
+
+.admin-header h1 {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.admin-header p {
+  margin: 3px 0 0;
+  color: #dbeafe;
+  font-size: 14px;
+}
+
+.admin-header button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+
+  padding: 9px 16px;
+
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease;
+}
+
+.admin-header button:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.admin-main {
+  width: min(1280px, calc(100% - 32px));
+  margin: 0 auto;
+  padding: 32px 0;
+}
+
+.admin-tabs {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+
+  width: 100%;
+  max-width: 600px;
+
+  margin: 0 0 24px;
+  padding: 4px;
+
+  border: 1px solid #bfdbfe;
+  border-radius: 10px;
+
+  background: white;
+
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+}
+
+.admin-tabs a {
+  padding: 9px 16px;
+
+  border-radius: 7px;
+
+  color: #374151;
+  text-align: center;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+
+  transition: all 0.2s ease;
+}
+
+.admin-tabs a:hover {
+  background: #eff6ff;
+}
+
+.admin-tabs a.active {
+  background: linear-gradient(135deg, #2563eb, #3b82f6);
+  color: white;
+
+  box-shadow: 0 2px 5px rgba(37, 99, 235, 0.2);
+}
+
+@media (max-width: 700px) {
+  .admin-header {
+    padding: 20px 16px;
   }
-  
+
   .admin-header h1 {
-    margin: 0;
+    font-size: 20px;
   }
-  
-  .admin-header p {
-    margin: 4px 0 0;
-  }
-  
-  .admin-header button {
-    padding: 10px 20px;
-    border: 1px solid rgba(255, 255, 255, 0.4);
-    border-radius: 10px;
-    background: rgba(255, 255, 255, 0.08);
-    color: white;
-    cursor: pointer;
-  }
-  
+
   .admin-main {
-    padding: 38px 60px;
+    width: calc(100% - 24px);
+    padding-top: 24px;
   }
-  
+
   .admin-tabs {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    max-width: 740px;
-    margin-bottom: 38px;
-    border: 1px solid #bfdbfe;
-    border-radius: 25px;
-    overflow: hidden;
+    max-width: none;
   }
-  
+
   .admin-tabs a {
-    padding: 10px 25px;
-    border-radius: 22px;
-    color: #101828;
-    text-align: center;
-    text-decoration: none;
+    padding: 8px;
+    font-size: 13px;
   }
-  
-  .admin-tabs a.active {
-    background: #246bfd;
-    color: white;
-  }
+}

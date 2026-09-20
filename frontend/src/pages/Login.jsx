@@ -55,29 +55,12 @@ function Login() {
     <main className="login-page">
       <section className="login-hero">
         <div className="hero-content">
-          <div className="logo">O</div>
-
           <h1>Onboarding Platform</h1>
 
           <p>
             Tudo o que você precisa para começar sua jornada em um só lugar.
           </p>
 
-          <div className="hero-card">
-            <span>✓</span>
-            <div>
-              <strong>Aprenda no seu ritmo</strong>
-              <p>Acesse os conteúdos e acompanhe seu progresso.</p>
-            </div>
-          </div>
-
-          <div className="hero-card">
-            <span>✓</span>
-            <div>
-              <strong>Acompanhe seu progresso</strong>
-              <p>Veja tudo que já concluiu e o que ainda falta.</p>
-            </div>
-          </div>
         </div>
       </section>
 

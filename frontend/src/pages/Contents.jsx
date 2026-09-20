@@ -126,15 +126,12 @@ function Contents() {
     }
 
     try {
-      const response = await fetch(
-        `http://localhost:3000/contents/${id}`,
-        {
-          method: "DELETE",
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      const response = await fetch(`http://localhost:3000/contents/${id}`, {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
 
       if (!response.ok) {
         const data = await response.json();
@@ -160,13 +157,9 @@ function Contents() {
   return (
     <div className="contents-grid">
       <section className="content-card">
-        <h2>
-          {editingId ? "Editar Conteúdo" : "Criar Novo Conteúdo"}
-        </h2>
+        <h2>{editingId ? "Editar Conteúdo" : "Criar Novo Conteúdo"}</h2>
 
-        <p>
-          Adicione conteúdos para o onboarding de novos funcionários
-        </p>
+        <p>Adicione conteúdos para o onboarding de novos funcionários</p>
 
         <form onSubmit={handleSubmit}>
           <label htmlFor="title">Título / Pergunta</label>
@@ -179,9 +172,7 @@ function Contents() {
             required
           />
 
-          <label htmlFor="description">
-            Descrição / Resposta
-          </label>
+          <label htmlFor="description">Descrição / Resposta</label>
 
           <textarea
             id="description"
@@ -209,11 +200,7 @@ function Contents() {
 
           <label>Criador</label>
 
-          <input
-            type="text"
-            value="Administrador"
-            disabled
-          />
+          <input type="text" value="Administrador" disabled />
 
           {error && <p className="form-error">{error}</p>}
           {message && <p className="form-success">{message}</p>}
@@ -244,28 +231,25 @@ function Contents() {
             <p>Nenhum conteúdo cadastrado.</p>
           ) : (
             contents.map((content) => (
-              <article
-                className="content-item"
-                key={content.id}
-              >
+              <article className="content-item" key={content.id}>
                 <div className="content-item-header">
                   <h3>{content.title}</h3>
 
-                  <div>
+                  <div className="content-actions">
                     <button
-                      className="icon-button"
+                      className="button-edit"
                       onClick={() => handleEdit(content)}
                       type="button"
                     >
-                      ✏️
+                      Editar
                     </button>
 
                     <button
-                      className="icon-button"
+                      className="button-delete"
                       onClick={() => handleDelete(content.id)}
                       type="button"
                     >
-                      🗑️
+                      Excluir
                     </button>
                   </div>
                 </div>

@@ -4,6 +4,7 @@ import "./Onboarding.css";
 function Onboarding() {
   const [contents, setContents] = useState([]);
   const [categories, setCategories] = useState([]);
+  const [progress, setProgress] = useState([]);
 
   const [search, setSearch] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("");
@@ -13,22 +14,33 @@ function Onboarding() {
   useEffect(() => {
     async function loadData() {
       try {
-        const [contentsResponse, categoriesResponse] =
-          await Promise.all([
-            fetch("http://localhost:3000/contents", {
-              headers: {
-                Authorization: `Bearer ${token}`,
-              },
-            }),
-            fetch("http://localhost:3000/categories", {
-              headers: {
-                Authorization: `Bearer ${token}`,
-              },
-            }),
-          ]);
+        const [
+          contentsResponse,
+          categoriesResponse,
+          progressResponse,
+        ] = await Promise.all([
+          fetch("http://localhost:3000/contents", {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }),
+
+          fetch("http://localhost:3000/categories", {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }),
+
+          fetch("http://localhost:3000/progress", {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }),
+        ]);
 
         const contentsData = await contentsResponse.json();
         const categoriesData = await categoriesResponse.json();
+        const progressData = await progressResponse.json();
 
         if (contentsResponse.ok) {
           setContents(contentsData);
@@ -36,6 +48,10 @@ function Onboarding() {
 
         if (categoriesResponse.ok) {
           setCategories(categoriesData);
+        }
+
+        if (progressResponse.ok) {
+          setProgress(progressData);
         }
       } catch (error) {
         console.error(error);
@@ -45,10 +61,63 @@ function Onboarding() {
     loadData();
   }, [token]);
 
+  function isCompleted(contentId) {
+    return progress.some(
+      (item) =>
+        item.contentId === contentId &&
+        item.completed === true
+    );
+  }
+
+  async function handleToggleComplete(contentId) {
+    const completed = !isCompleted(contentId);
+
+    try {
+      const response = await fetch(
+        `http://localhost:3000/progress/${contentId}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({
+            completed,
+          }),
+        }
+      );
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        console.error(data.message);
+        return;
+      }
+
+      setProgress((currentProgress) => {
+        const existingProgress = currentProgress.find(
+          (item) => item.contentId === contentId
+        );
+
+        if (existingProgress) {
+          return currentProgress.map((item) =>
+            item.contentId === contentId
+              ? data
+              : item
+          );
+        }
+
+        return [...currentProgress, data];
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
   const filteredContents = useMemo(() => {
     return contents.filter((content) => {
-      const text = `${content.title} ${content.description}`
-        .toLowerCase();
+      const text =
+        `${content.title} ${content.description}`.toLowerCase();
 
       const matchesSearch = text.includes(
         search.toLowerCase()
@@ -61,6 +130,17 @@ function Onboarding() {
       return matchesSearch && matchesCategory;
     });
   }, [contents, search, selectedCategory]);
+
+  const completedCount = contents.filter((content) =>
+    isCompleted(content.id)
+  ).length;
+
+  const progressPercentage =
+    contents.length === 0
+      ? 0
+      : Math.round(
+          (completedCount / contents.length) * 100
+        );
 
   return (
     <div className="onboarding">
@@ -79,14 +159,24 @@ function Onboarding() {
       <section className="progress-card">
         <div className="progress-header">
           <strong>Seu progresso</strong>
-          <strong>0 / {contents.length} concluídos</strong>
+
+          <strong>
+            {completedCount} / {contents.length} concluídos
+          </strong>
         </div>
 
         <div className="progress-bar">
-          <div className="progress-value" />
+          <div
+            className="progress-value"
+            style={{
+              width: `${progressPercentage}%`,
+            }}
+          />
         </div>
 
-        <p>0% completo — continue assim!</p>
+        <p>
+          {progressPercentage}% completo — continue assim!
+        </p>
       </section>
 
       <div className="content-filters">
@@ -94,7 +184,9 @@ function Onboarding() {
           type="search"
           placeholder="🔍 Buscar por título ou descrição..."
           value={search}
-          onChange={(event) => setSearch(event.target.value)}
+          onChange={(event) =>
+            setSearch(event.target.value)
+          }
         />
 
         <select
@@ -135,8 +227,16 @@ function Onboarding() {
                 )}
               </div>
 
-              <button type="button" className="complete-button">
-                ◯ Concluir
+              <button
+                type="button"
+                className="complete-button"
+                onClick={() =>
+                  handleToggleComplete(content.id)
+                }
+              >
+                {isCompleted(content.id)
+                  ? "✓ Concluído"
+                  : "◯ Concluir"}
               </button>
             </div>
 

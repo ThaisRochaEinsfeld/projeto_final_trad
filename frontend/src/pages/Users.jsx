@@ -1,4 +1,5 @@
 import { useState } from "react";
+import "./Users.css";
 
 function Users() {
   const [name, setName] = useState("");
@@ -106,8 +107,8 @@ function Users() {
           </select>
         </div>
 
-        {error && <p>{error}</p>}
-        {message && <p>{message}</p>}
+        {error && <p className="form-error">{error}</p>}
+        {message && <p className="form-success">{message}</p>}
 
         <button type="submit" disabled={loading}>
           {loading ? "Criando..." : "Criar usuário"}
